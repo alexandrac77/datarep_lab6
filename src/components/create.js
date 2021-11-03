@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Create extends Component {
     constructor() {
@@ -18,6 +19,26 @@ class Create extends Component {
         console.log("Name: " +this.state.Title+
         " Year: " + this.state.Year +
         "Poster: " + this.state.Poster);
+
+        const newMovie = {
+            Title:this.state.Title,
+            Year:this.state.Year,
+            Poster:this.state.Poster
+        }
+
+        //post request to the server
+        axios.post('http://localhost:4000/api/movies', newMovie)
+        .then((response)=>{
+            console.log(response);
+        })
+
+        //if error
+        .catch((err)=>{
+            console.log(err);
+        });
+
+
+
         event.preventDefault();
         this.setState({
             Title:'',
